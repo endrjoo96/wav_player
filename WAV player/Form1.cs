@@ -24,28 +24,39 @@ namespace WAV_player
             FileList.HeaderStyle = ColumnHeaderStyle.None;
             FileList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(@"D:\");
-            if (directoryInfo.Exists)
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            foreach (DriveInfo drive in drives)
             {
-                DirList.AfterSelect += DirList_AfterSelect;
-                BuildTree(directoryInfo, DirList.Nodes);
+                string directoryInfo =drive.RootDirectory.FullName;
+                if (Directory.Exists(directoryInfo))
+                {
+                    DirList.AfterSelect += DirList_AfterSelect;
+                    DirList.BeforeExpand += DirList_BeforeExpand;
+                    BuildTree(directoryInfo, DirList.Nodes);
+                }
             }
         }
 
-        private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
+        private void DirList_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            TreeNode curNode = addInMe.Add(directoryInfo.Name);
-            FileInfo[] fileCollection = directoryInfo.GetFiles();
-            DirectoryInfo[] dirCollection = directoryInfo.GetDirectories();
+            //throw new NotImplementedException();
+            BuildTree(e.Node.Text, e.Node.Nodes);
+        }
+
+        private void BuildTree(string directoryInfo, TreeNodeCollection addInMe)
+        {
+            string x = Path.GetFileName(directoryInfo);
+            if ("".Equals(x))
+                x = directoryInfo;
+            TreeNode curNode = addInMe.Add(x);
+            string[] dirCollection = Directory.GetDirectories(directoryInfo);
             try
             {
-                foreach (FileInfo file in fileCollection)
+                foreach (string subdir in dirCollection)
                 {
-                    curNode.Nodes.Add(file.FullName, file.Name);
-                }
-                foreach (DirectoryInfo subdir in dirCollection)
-                {
-                    BuildTree(subdir, curNode.Nodes);
+                    string[] sub = Directory.GetDirectories(subdir);
+                    if (sub.Length == 0)
+                        curNode.Nodes.Add(Path.GetFileName(subdir));
                 }
             }catch (System.UnauthorizedAccessException ex)
             {
