@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WAV_player"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="WAV player" Height="159.049" Width="491.631" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="299*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Play_button" Content="Odtwórz" Margin="0,41,248,0" Click="Play_button_Click" Height="29" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Grid.ColumnSpan="2"/>
+        <Menu IsMainMenu="True" VerticalAlignment="Top" Height="18" Grid.ColumnSpan="2">
+            <MenuItem x:Name="Open_menuItem" Click="Open_menuItem_Click"  Header="Otwórz">
+            </MenuItem>
+            <MenuItem x:Name="Playlist_menuItem" Click="Playlist_menuItem_Click"  Header="Playlista">
+            </MenuItem>
+        </Menu>
+        <StatusBar Margin="0,100,0,0" Grid.ColumnSpan="2">
+            <Label x:Name="nowplaying_label" Content="Nie odtwarzam" Height="20" Width="470" FontSize="10" Margin="0,-7,0,0" HorizontalAlignment="Left" MinHeight="22"/>
+        </StatusBar>
+        <Slider x:Name="Progress_slider" Margin="10,18,10,0" Height="18" VerticalAlignment="Top" 
+                Thumb.DragStarted="Progress_slider_DragStarted" Thumb.DragCompleted="Progress_slider_DragCompleted" Grid.ColumnSpan="2"/>
+        <Button x:Name="Next_button" Content="&gt;&gt;" Margin="0,41,98,0" Click="Next_button_Click" Height="29" VerticalAlignment="Top" RenderTransformOrigin="0.953,0.77" HorizontalAlignment="Right" Width="50" Grid.Column="1"/>
+        <Button x:Name="Loop_button" Content="Nie zapętlaj" Margin="10,75,57,0" VerticalAlignment="Top" Click="Loop_button_Click" Height="20"/>
+        <Button x:Name="Prev_button" Margin="0,41,39,0" Click="Prev_button_Click" Height="29" VerticalAlignment="Top" Content="&lt;&lt;" HorizontalAlignment="Right" Width="50"/>
+        <Button x:Name="Stop_button" Content="Zatrzymaj" HorizontalAlignment="Right" Margin="0,41,158,0" VerticalAlignment="Top" Width="80" Height="29" RenderTransformOrigin="1.588,-0.31" Click="Stop_button_Click" Grid.Column="1"/>
+        <Button x:Name="OpenCustom_button" Content="Otwórz (custom)" HorizontalAlignment="Left" Margin="177,75,0,0" VerticalAlignment="Top" Width="112" Click="OpenCustom_button_Click" Grid.Column="1"/>
+
     </Grid>
 </Window>

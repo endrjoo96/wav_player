@@ -1,0 +1,21 @@
+﻿<Window x:Class="WAV_player.Playlista"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WAV_player"
+        mc:Ignorable="d"
+        Title="Playlista" Height="323.907" Width="216.419" ShowInTaskbar="False" ResizeMode="NoResize">
+    <ListView x:Name="ListView1" Margin="0">
+        <ListView.Resources>
+            <Style TargetType="GridViewColumnHeader">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+        </ListView.Resources>
+        <ListView.View>
+            <GridView>
+                <GridViewColumn/>
+            </GridView>
+        </ListView.View>
+    </ListView>
+</Window>
